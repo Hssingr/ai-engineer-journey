@@ -21,10 +21,11 @@ but as programmable components you can integrate into any application.
 |------|-------------|
 | `claude_api_learning.py` | 8 progressive examples using the Anthropic Claude API |
 | `openai_api_learning.py` | 12 progressive examples using the OpenAI API |
+| `main.py` | Side-by-side GPT vs Claude comparison across 5 prompts with token counts, cost, and latency |
 
 ---
 
-## 📚 What Each File Covers
+## What Each File Covers
 
 ### `claude_api_learning.py`
 
@@ -56,6 +57,17 @@ but as programmable components you can integrate into any application.
 | 11 | Tool calling — full loop | Execute function + return result to model |
 | 12 | Metadata | Request tagging for tracking and debugging |
 
+### `main.py`
+
+| # | Feature | What it does |
+|---|---------|-------------|
+| 1 | Dual API calls | Sends the same prompt to both OpenAI and Anthropic |
+| 2 | Side-by-side display | Renders responses in two columns for easy comparison |
+| 3 | Token tracking | Input/output token counts per provider |
+| 4 | Cost calculation | Per-call cost using configurable pricing via env vars |
+| 5 | Latency measurement | Response time in ms for each API call |
+| 6 | Summary stats | Total tokens and average latency across all prompts |
+
 ---
 
 ## Running the Examples
@@ -69,6 +81,13 @@ python claude_api_learning.py
 
 # OpenAI examples
 python openai_api_learning.py
+
+# Comparison runner
+python main.py
+
+# Override models or pricing via env vars
+OPENAI_MODEL=gpt-4o ANTHROPIC_MODEL=claude-opus-4-6 python main.py
+OPENAI_INPUT_PRICING=2.5 ANTHROPIC_OUTPUT_PRICING=20 python main.py
 ```
 
 ---
@@ -83,6 +102,7 @@ Pricing reference used (as of May 2025):
 | claude-haiku-4-5 | $0.80 | $4.00 |
 | claude-sonnet-4-6 | $3.00 | $15.00 |
 | gpt-4o-mini | $0.15 | $0.60 |
+| gpt-4.1-mini | $0.40 | $1.60 |
 
 Running all examples in this week costs roughly **$0.05–0.15 total**.
 
@@ -108,12 +128,12 @@ to call a function. Your code executes it and sends the result back.
 This is the core loop behind every AI agent.
 
 **Cost tracking from day one**  
-`tokens_in × price_in + tokens_out × price_out`.  
+`tokens_in x price_in + tokens_out x price_out`.  
 Build this habit now — it matters at scale.
 
 ---
 
-## 🔗 Resources
+## Resources
 
 - [Anthropic API Docs](https://docs.anthropic.com/en/api/getting-started)
 - [OpenAI API Docs](https://platform.openai.com/docs/guides/text-generation)
